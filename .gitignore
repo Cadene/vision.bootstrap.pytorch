@@ -3,7 +3,7 @@ logs/*
 data/*
 !.gitkeep
 
-# Bootstrap modules
+# Bootstrap modules
 classification/*
 imagenet/*
 mnist/*

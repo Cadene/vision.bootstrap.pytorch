@@ -9,8 +9,13 @@ from bootstrap.datasets import transforms as bootstrap_tf
 
 class Imagenet(data.Dataset):
 
-    def __init__(self, dir_data='data/imagenet', split='train',
-            batch_size=100, nb_threads=1, pin_memory=True, item_tf=None):
+    def __init__(self,
+                 dir_data='data/imagenet',
+                 split='train',
+                 batch_size=100,
+                 nb_threads=1,
+                 pin_memory=True,
+                 item_tf=None):
         self.dir_data = dir_data
         self.split = split
         self.batch_size = batch_size
