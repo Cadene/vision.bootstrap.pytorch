@@ -1,0 +1,42 @@
+exp:
+    dir: logs/imagenet/default
+    resume: # last, best_[...], or empty (from scratch)
+dataset:
+    import: imagenet.datasets.factory
+    name: imagenet
+    dir: data/imagenet
+    train_split:
+    eval_split: val
+    nb_threads: 4
+    batch_size: 32
+model:
+    name: simple
+    network:
+        import: imagenet.models.networks.factory
+        name: nasnetalarge
+        pretrained: imagenet # or leave None
+    criterion:
+        name: nll
+    metric:
+        name: accuracy
+        topk: [1,5]
+optimizer:
+    name: adam
+    lr: 0.0001
+engine:
+    name: default
+    debug: False
+    nb_epochs: 10
+    print_freq: 10
+    saving_criteria:
+        - accuracy_top5:max # save when new_best > best
+misc:
+    cuda: True
+    seed: 1337
+    # world_size: 1
+    # dist_url: tcp://224.66.41.62:23456
+    # dist_backend: gloo
+view:
+    - logs:train_epoch.loss+logs:eval_epoch.loss
+    - logs:train_epoch.accuracy_top1+logs:eval_epoch.accuracy_top1
+    - logs:train_epoch.accuracy_top5+logs:eval_epoch.accuracy_top5

@@ -1,0 +1,19 @@
+__include__: default.yaml
+exp:
+    dir: logs/imagenet/custom
+dataset:
+    batch_size: 64
+model:
+    network:
+        name: custom
+        pretrained:
+        input_dim: 224
+        resize_dim: 256
+optimizer:
+    name: adam
+    lr: 0.0001
+view:
+    - logs:train_epoch.loss+logs:eval_epoch.loss
+    - logs:train_epoch.accuracy_top1+logs:eval_epoch.accuracy_top1
+    - logs:train_epoch.accuracy_top5+logs:eval_epoch.accuracy_top5
+    - logs:optimizer.lr
